@@ -10,16 +10,27 @@ import RemoveObject from './pages/RemoveObject'
 import RemoveBackground from './pages/RemoveBackground'
 import ReviewResume from './pages/ReviewResume'
 import Community from './pages/Community'
+import { useAuth } from '@clerk/clerk-react'
+import { useEffect } from 'react'
 
 
 
 
 
 const App = () => {
+
+  const { getToken } = useAuth();
+  useEffect(() => {
+    getToken().then((token) => console.log(token));
+  }, [])
+
+
+
+
   return (
     <div>
       <Routes>
-          <Route path='/' element={<Home />} />
+        <Route path='/' element={<Home />} />
 
 
         <Route path='/ai' element={<Layout />} >
@@ -29,7 +40,7 @@ const App = () => {
           <Route path='generate-image' element={<GenerateImages />} />
           <Route path='remove-background' element={<RemoveBackground />} />
           <Route path='remove-object' element={<RemoveObject />} />
-          <Route path='review-resume' element={<ReviewResume/>} />
+          <Route path='review-resume' element={<ReviewResume />} />
           <Route path='community' element={<Community />} />
 
         </Route>
